@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DefaultsService } from './defaults.service';
 
 @Component({
   selector: 'app-super-basic',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SuperBasicComponent implements OnInit {
 
-  word = 'Tacos';
-  constructor() { }
+  word: string;
+  constructor(private service: DefaultsService) { }
 
   ngOnInit() {
+    this.word = this.service.getDefault();
   }
 
   makeUpper() {

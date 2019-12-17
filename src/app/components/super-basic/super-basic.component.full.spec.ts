@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { click, ButtonClickEvents } from 'src/app/utils/testing';
+import { DefaultsService } from './defaults.service';
 
 
 describe('using the component', () => {
@@ -13,18 +14,30 @@ describe('using the component', () => {
   let elH1: HTMLElement;
   let deBtn: DebugElement;
   let elBtn: HTMLInputElement;
+  let fakeService: any;
 
   beforeEach(() => {
+
+    fakeService = {
+
+      getDefault() {
+        return 'Tacos';
+      }
+    };
+
+
     TestBed.configureTestingModule({
-      declarations: [SuperBasicComponent]
+      declarations: [SuperBasicComponent],
+      providers: [{ provide: DefaultsService, useValue: fakeService }]
     });
 
+    // console.log(TestBed.get(DefaultsService));
     fixture = TestBed.createComponent(SuperBasicComponent);
     component = fixture.componentInstance;
 
-    deH1 = fixture.debugElement.query(By.css('h1'));
+    deH1 = fixture.debugElement.query(By.css('[data-basic-word]'));
     elH1 = deH1.nativeElement;
-    deBtn = fixture.debugElement.query(By.css('input'));
+    deBtn = fixture.debugElement.query(By.css('[data-basic-button]'));
     elBtn = deBtn.nativeElement;
     fixture.detectChanges();
   });
