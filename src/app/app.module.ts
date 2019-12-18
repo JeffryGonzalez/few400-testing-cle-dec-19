@@ -8,6 +8,7 @@ import { DefaultsService } from './components/super-basic/defaults.service';
 import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 import { DataService } from './components/shopping-list/data.service';
 import { EnvironmentService } from './services/environment.service';
+import { HttpClientModule } from '@angular/common/http';
 const serviceToUse = new DefaultsService();
 serviceToUse._default = 'PIZZA IS BEST LOL!';
 
@@ -19,7 +20,8 @@ serviceToUse._default = 'PIZZA IS BEST LOL!';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [{ provide: DefaultsService, useValue: serviceToUse },
     DataService,
